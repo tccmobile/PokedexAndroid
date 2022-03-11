@@ -2,10 +2,10 @@ package com.example.pokedex
 
 import android.content.res.Resources
 import android.util.DisplayMetrics
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -50,9 +50,21 @@ fun pokeDetail(){
                     Text("#1", fontSize = 24.sp)
                     Text("Bulbasaur", fontSize = 36.sp)
                     TypeBox()
-                    Spacer(modifier = Modifier.padding(vertical = 15.dp))
+                    Spacer(modifier = Modifier.padding(vertical = 10.dp))
                     attribBox(modifier = Modifier.padding(20.dp))
-
+                    Text("Bulbasaur is a small, quadrupedal Pokémon that has blue-green skin with darker patches. " +
+                            "It has red eyes with white pupils, pointed, ear-like structures on top of its head, and a short, blunt snout with a wide mouth. " +
+                            "A pair of small, pointed teeth are visible in the upper jaw when its mouth is open. Each of its thick legs ends with three sharp claws. " +
+                            "On Bulbasaur's back is a green plant bulb, which is grown from a seed planted there at birth. " +
+                            "The bulb also conceals two slender, tentacle-like vines and provides it with energy through photosynthesis as well as from the nutrient-rich seeds contained within.",
+                        Modifier
+                            .width(((sceneWidth / sceneDepth)/1.5).dp)
+                            .height(((sceneHeight / sceneDepth) / 6).dp)
+                            .verticalScroll(
+                                rememberScrollState()
+                            ))
+                    Spacer(modifier = Modifier.padding(vertical = 10.dp))
+                    statsBox()
 
             }
             }
@@ -107,4 +119,32 @@ fun attribBox(modifier: Modifier){
 @Preview(showBackground = true)
 fun previewAttrib(){
     attribBox(modifier = Modifier.padding(20.dp))
+}
+
+@Composable
+fun statsBox(){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Stats")
+        Spacer(modifier = Modifier.height(15.dp))
+        Row(verticalAlignment = Alignment.CenterVertically){
+            Text("ATK")
+            Spacer(modifier = Modifier.width(15.dp))
+            Text("49")
+            Spacer(modifier = Modifier.width(2.dp))
+            LinearProgressIndicator(progress = 0.49f)
+        }
+        Row(verticalAlignment = Alignment.CenterVertically){
+            Text("DEF")
+            Spacer(modifier = Modifier.width(15.dp))
+            Text("49")
+            Spacer(modifier = Modifier.width(2.dp))
+            LinearProgressIndicator(progress = 0.49f)
+        }
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun previewStats(){
+    statsBox()
 }
