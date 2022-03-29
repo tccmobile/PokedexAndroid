@@ -1,7 +1,6 @@
 package com.example.pokedex
 
 import android.content.res.Resources
-import android.util.DisplayMetrics
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun pokeDetail(){
+fun pokeDetail(pokemon: Pokemon){
     var sceneWidth = Resources.getSystem().displayMetrics.widthPixels
     var sceneHeight = Resources.getSystem().displayMetrics.heightPixels
     var sceneDepth = Resources.getSystem().displayMetrics.density
@@ -47,11 +45,11 @@ fun pokeDetail(){
             ) {
                 Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
                     Spacer(modifier = Modifier.padding(vertical = 25.dp))
-                    Text("#1", fontSize = 24.sp)
-                    Text("Bulbasaur", fontSize = 36.sp)
-                    TypeBox()
+                    Text(pokemon.id.toString(), fontSize = 24.sp)
+                    Text(pokemon.name, fontSize = 36.sp)
+                    TypeBox(pokemon)
                     Spacer(modifier = Modifier.padding(vertical = 10.dp))
-                    attribBox(modifier = Modifier.padding(20.dp))
+                    attribBox(pokemon,modifier = Modifier.padding(20.dp))
                     Text("Bulbasaur is a small, quadrupedal Pokémon that has blue-green skin with darker patches. " +
                             "It has red eyes with white pupils, pointed, ear-like structures on top of its head, and a short, blunt snout with a wide mouth. " +
                             "A pair of small, pointed teeth are visible in the upper jaw when its mouth is open. Each of its thick legs ends with three sharp claws. " +
@@ -64,7 +62,7 @@ fun pokeDetail(){
                                 rememberScrollState()
                             ))
                     Spacer(modifier = Modifier.padding(vertical = 10.dp))
-                    statsBox()
+                    statsBox(pokemon)
 
             }
             }
@@ -89,15 +87,15 @@ fun pokeDetail(){
 @Composable
 @Preview(showBackground = true)
 fun detailPreview(){
-    pokeDetail()
+    pokeDetail(mockPokedex[0])
 }
 
 @Composable
-fun attribBox(modifier: Modifier){
+fun attribBox(pokemon: Pokemon, modifier: Modifier){
     Row(modifier = Modifier.padding(10.dp)){
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Row(verticalAlignment = Alignment.CenterVertically){
-                Text("0.7", fontSize = 24.sp)
+                Text(pokemon.weight.toString(), fontSize = 24.sp)
                 Text("KG", modifier = Modifier.padding(2.dp),
                 color = Color.LightGray)
             }
@@ -106,7 +104,7 @@ fun attribBox(modifier: Modifier){
         Spacer(modifier = Modifier.width(15.dp))
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Row(verticalAlignment = Alignment.CenterVertically){
-                Text("6.9", fontSize = 24.sp)
+                Text(pokemon.height.toString(), fontSize = 24.sp)
                 Text("METER", modifier = Modifier.padding(2.dp),
                     color = Color.LightGray)
             }
@@ -118,27 +116,27 @@ fun attribBox(modifier: Modifier){
 @Composable
 @Preview(showBackground = true)
 fun previewAttrib(){
-    attribBox(modifier = Modifier.padding(20.dp))
+    attribBox(mockPokedex[0], modifier = Modifier.padding(20.dp))
 }
 
 @Composable
-fun statsBox(){
+fun statsBox(pokemon: Pokemon){
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text("Stats")
         Spacer(modifier = Modifier.height(15.dp))
         Row(verticalAlignment = Alignment.CenterVertically){
             Text("ATK")
             Spacer(modifier = Modifier.width(15.dp))
-            Text("49")
+            Text(pokemon.attack.toString())
             Spacer(modifier = Modifier.width(2.dp))
-            LinearProgressIndicator(progress = 0.49f)
+            LinearProgressIndicator(progress = (pokemon.attack/100).toFloat())
         }
         Row(verticalAlignment = Alignment.CenterVertically){
             Text("DEF")
             Spacer(modifier = Modifier.width(15.dp))
-            Text("49")
+            Text(pokemon.defence.toString())
             Spacer(modifier = Modifier.width(2.dp))
-            LinearProgressIndicator(progress = 0.49f)
+            LinearProgressIndicator(progress = (pokemon.defence/100).toFloat())
         }
     }
 }
@@ -146,5 +144,5 @@ fun statsBox(){
 @Composable
 @Preview(showBackground = true)
 fun previewStats(){
-    statsBox()
+    statsBox(mockPokedex[0])
 }

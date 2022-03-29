@@ -1,7 +1,9 @@
 package com.example.pokedex
 
+import com.example.pokedex.ui.theme.PokedexTheme
+
 data class Pokemon(
-    val id: Int = 0,
+    val id: Int = 1,
     val name: String = "Bulbasaur",
     val imageURL: String = "bulb",
     val type: String = "poison",
@@ -11,3 +13,8 @@ data class Pokemon(
     val attack: Double = 30.0,
     val defence: Double = 30.0
 )
+
+
+val mockPokedex =  mutableListOf<Pokemon>(Pokemon(),
+    Pokemon(1,"Ivysaur"),Pokemon
+(3,"Charmander", type = "fire"))

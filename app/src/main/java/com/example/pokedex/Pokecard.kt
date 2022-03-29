@@ -10,7 +10,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -21,8 +20,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+
 @Composable
-fun pokecard(){
+fun pokecard(pokemon: Pokemon) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -38,15 +38,15 @@ fun pokecard(){
             Text(buildAnnotatedString {
                 withStyle(style = SpanStyle(fontWeight = FontWeight.W900,
                 color = Color.Black)){
-                    append("Bulbasaur")
+                    append(pokemon.name)
                 }
             })
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically) {
-                TypeBox()
+                TypeBox(pokemon)
                 Image(painter = painterResource(id = R.drawable.bulb),
-                    contentDescription = "Bulbasaur",
+                    contentDescription = pokemon.name,
                 modifier = Modifier.padding(5.dp))
             }
         }
@@ -54,14 +54,14 @@ fun pokecard(){
 }
 
 @Composable
-fun TypeBox(){
+fun TypeBox(pokemon: Pokemon) {
     Column(
         modifier = Modifier.wrapContentSize(Alignment.Center)
     ) {
        Box(modifier = Modifier.size(width = 70.dp, height = 30.dp)
            .clip(RoundedCornerShape(15.dp))
            .background(Color.LightGray)) {
-           Text("Poison",
+           Text(pokemon.type,
            modifier = Modifier.padding(vertical = 4.dp, horizontal = 10.dp))
        }
     }
@@ -71,5 +71,5 @@ fun TypeBox(){
 @Composable
 @Preview(showBackground = true)
 fun pokecardPreview(){
-    pokecard()
+    pokecard(mockPokedex[0])
 }
