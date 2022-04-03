@@ -22,6 +22,3 @@ val mockPokedex = mutableListOf<Pokemon>(
 )
 
 
-val mockPokedex =  mutableListOf<Pokemon>(Pokemon(),
-    Pokemon(1,"Ivysaur"),Pokemon
-(3,"Charmander", type = "fire"))
