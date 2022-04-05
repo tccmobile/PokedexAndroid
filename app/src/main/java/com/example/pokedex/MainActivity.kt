@@ -1,5 +1,6 @@
 package com.example.pokedex
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,12 +15,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
+//import androidx.navigation.compose.rememberNavController
 import com.example.pokedex.ui.theme.PokedexTheme
 
 class MainActivity : ComponentActivity() {
+
+    companion object{
+        public  var mycontext: Context? = null
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mycontext = applicationContext
+
         setContent {
           //  val navController = rememberNavController()
 
@@ -39,7 +48,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Pokedex() {
-    val myPokemon = mockPokedex
+    val myPokemon = parsePokedex()
 
     LazyVerticalGrid(cells = GridCells.Fixed(2),
         contentPadding = PaddingValues(
