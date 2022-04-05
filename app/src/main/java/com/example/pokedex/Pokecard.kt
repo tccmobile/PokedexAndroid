@@ -63,7 +63,7 @@ fun pokecard(pokemon: Pokemon) {
                 Image(
                     painter= painterResource(pid),
                     contentDescription = pokemon.name,
-                    modifier = Modifier.padding(5.dp)
+                    modifier = Modifier.padding(5.dp).size(height = 50.dp, width = 50.dp)
                 )
             }
         }
