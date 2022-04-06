@@ -1,5 +1,6 @@
 package com.example.pokedex
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,10 +19,16 @@ import androidx.navigation.compose.rememberNavController
 import com.example.pokedex.ui.theme.PokedexTheme
 
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        public var myContext: Context? = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        myContext = applicationContext
         setContent {
-          //  val navController = rememberNavController()
+
 
             PokedexTheme {
                 // A surface container using the 'background' color from the theme
@@ -39,7 +46,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Pokedex() {
-    val myPokemon = mockPokedex
+    val myPokemon = parsePokedex()
 
     LazyVerticalGrid(cells = GridCells.Fixed(2),
         contentPadding = PaddingValues(

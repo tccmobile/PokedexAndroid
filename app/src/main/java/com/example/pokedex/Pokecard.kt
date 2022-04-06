@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -46,7 +47,7 @@ fun pokecard(pokemon: Pokemon) {
                         color = Color.Black
                     )
                 ) {
-                    append(pokemon.name)
+                    append(pokemon.name.uppercase())
                 }
             })
             Row(
@@ -64,6 +65,7 @@ fun pokecard(pokemon: Pokemon) {
                     painter= painterResource(pid),
                     contentDescription = pokemon.name,
                     modifier = Modifier.padding(5.dp)
+                        .size(height = 50.dp, width = 50.dp)
                 )
             }
         }
@@ -81,7 +83,7 @@ fun TypeBox(pokemon: Pokemon) {
                 .height(30.dp)
                 .width(IntrinsicSize.Min)
                 .clip(RoundedCornerShape(15.dp))
-                .background(Color.LightGray)
+                .background(Color.LightGray.copy(alpha = .5f))
         ) {
             Text(
                 pokemon.type,
@@ -95,7 +97,14 @@ fun typeColor(pokemon: Pokemon): Color {
     val pokecolor = when (pokemon.type){
         "fire" -> Color.Red
         "poison" -> Color.Green
-        else -> Color.Black
+        "water" -> Color.Blue
+        "electric" -> Color.Yellow
+        "psychic" -> Color.Magenta
+        "ground" -> Color.DarkGray
+        "flying" -> Color.Cyan
+        "normal" -> Color.Gray
+        "fairy" -> Color.Red
+        else -> Color.Gray
     }
     return pokecolor
 }
