@@ -1,6 +1,9 @@
 package com.example.pokedex
 
 import com.example.pokedex.ui.theme.PokedexTheme
+import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 data class Pokemon(
     val id: Int = 1,
