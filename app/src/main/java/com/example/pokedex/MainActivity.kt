@@ -15,18 +15,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavHostController
+import com.example.pokedex.MainActivity.Companion.myPokemon
 import com.example.pokedex.ui.theme.PokedexTheme
 
 class MainActivity : ComponentActivity() {
 
     companion object {
         public var myContext: Context? = null
+        public lateinit var myPokemon: List<Pokemon>
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         myContext = applicationContext
+        myPokemon = parsePokedex()
         setContent {
 
 
@@ -36,7 +39,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Pokedex()
+                    Navigation()
                 }
             }
         }
@@ -45,8 +48,9 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Pokedex() {
-    val myPokemon = parsePokedex()
+fun Pokedex(navController: NavHostController) {
+   // var myPokemon = parsePokedex()
+
 
     LazyVerticalGrid(cells = GridCells.Fixed(2),
         contentPadding = PaddingValues(
@@ -57,15 +61,15 @@ fun Pokedex() {
         ),
         content = {
             items(myPokemon.size){ index ->
-                pokecard(myPokemon[index])
+                pokecard(navController, myPokemon[index])
             }
         })
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     PokedexTheme {
-        Pokedex()
+        Pokedex(navController)
     }
-}
+} */

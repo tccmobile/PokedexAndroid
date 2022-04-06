@@ -16,13 +16,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.pokedex.MainActivity.Companion.myPokemon
 
 @Composable
-fun pokeDetail(pokemon: Pokemon) {
+fun pokeDetail( navController: NavHostController, pokemonID: Int?) {
     var sceneWidth = Resources.getSystem().displayMetrics.widthPixels
     var sceneHeight = Resources.getSystem().displayMetrics.heightPixels
     var sceneDepth = Resources.getSystem().displayMetrics.density
 
+    var pokemon = myPokemon[pokemonID?.minus(1)!!]
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -96,12 +99,12 @@ fun pokeDetail(pokemon: Pokemon) {
     }
 }
 
-@Composable
+/*@Composable
 @Preview(showBackground = true)
 fun detailPreview() {
-    pokeDetail(mockPokedex[3])
+    pokeDetail(mockPokedex[3], navController)
 }
-
+*/
 @Composable
 fun attribBox(pokemon: Pokemon, modifier: Modifier) {
     Row(modifier = Modifier.padding(10.dp)) {
@@ -128,13 +131,13 @@ fun attribBox(pokemon: Pokemon, modifier: Modifier) {
         }
     }
 }
-
+/*
 @Composable
 @Preview(showBackground = true)
 fun previewAttrib() {
     attribBox(mockPokedex[0], modifier = Modifier.padding(20.dp))
 }
-
+*/
 @Composable
 fun statsBox(pokemon: Pokemon) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -156,9 +159,10 @@ fun statsBox(pokemon: Pokemon) {
         }
     }
 }
-
+/*
 @Composable
 @Preview(showBackground = true)
 fun previewStats() {
     statsBox(mockPokedex[0])
 }
+*/
